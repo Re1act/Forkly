@@ -1,5 +1,4 @@
 import DOMPurify from 'isomorphic-dompurify';
-import { GetServerSideProps } from 'next';
 
 interface Ingredient {
   id: number;
@@ -15,11 +14,21 @@ interface Recipe {
   instructions: string;
 }
 
-interface RecipeDetailsProps {
-  recipe: Recipe;
+interface RecipePageProps {
+  params: { id: string };
 }
 
-const RecipeDetails: React.FC<RecipeDetailsProps> = ({ recipe }) => {
+export default async function RecipeDetails({ params }: RecipePageProps) {
+  const res = await fetch(
+    `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
+  );
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const recipe: Recipe = await res.json();
+
   const cleanSummary = DOMPurify.sanitize(recipe.summary, { ALLOWED_TAGS: [] });
 
   return (
@@ -47,23 +56,4 @@ const RecipeDetails: React.FC<RecipeDetailsProps> = ({ recipe }) => {
       </p>
     </div>
   );
-};
-
-// This function will run on the server and pass the recipe data as props
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id } = params as { id: string };
-
-  const res = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
-  );
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  const recipe: Recipe = await res.json();
-
-  return { props: { recipe } };
-};
-
-export default RecipeDetails;
+}
