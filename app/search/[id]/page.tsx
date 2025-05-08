@@ -21,7 +21,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function RecipeDetails({ params, searchParams }: Props) {
+export default async function RecipeDetails({ params }: Props) {
   const res = await fetch(
     `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
   );
