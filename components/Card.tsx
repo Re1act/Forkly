@@ -1,6 +1,13 @@
 import Link from 'next/link';
 
-function Card({ recipe }: any) {
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+  description?: string; 
+}
+
+function Card({ recipe }: { recipe: Recipe }) {
   return (
     <div className="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
       <img 

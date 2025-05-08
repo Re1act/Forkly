@@ -1,5 +1,19 @@
 import DOMPurify from 'isomorphic-dompurify';
 
+interface Ingredient {
+  id: number;
+  original: string;
+}
+
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+  summary: string;
+  extendedIngredients: Ingredient[];
+  instructions: string;
+}
+
 interface Props {
   params: {
     id: string;
@@ -16,7 +30,7 @@ export default async function RecipeDetails({ params }: Props) {
     throw new Error('Failed to fetch data');
   }
 
-  const recipe = await res.json();
+  const recipe: Recipe = await res.json();
 
   const cleanSummary = DOMPurify.sanitize(recipe.summary, { ALLOWED_TAGS: [] });
 
@@ -31,8 +45,8 @@ export default async function RecipeDetails({ params }: Props) {
       <p className="text-gray-700 mb-4">{cleanSummary}</p>
       <h2 className="text-2xl font-semibold mt-6 mb-2">Ingredients</h2>
       <ul className="list-disc pl-6 mb-4">
-        {recipe.extendedIngredients.map((ingredient: any, index: number) => (
-          <li key={ingredient.id - index } className="text-gray-800 mb-2">
+        {recipe.extendedIngredients.map((ingredient) => (
+          <li key={ingredient.id} className="text-gray-800 mb-2">
             {ingredient.original}
           </li>
         ))}
@@ -43,7 +57,6 @@ export default async function RecipeDetails({ params }: Props) {
           ? DOMPurify.sanitize(recipe.instructions, { ALLOWED_TAGS: [] })
           : 'No instructions available.'}
       </p>
-
     </div>
   );
 }
