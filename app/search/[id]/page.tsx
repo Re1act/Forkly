@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import DOMPurify from 'isomorphic-dompurify';
 import Image from 'next/image';
 
@@ -15,14 +16,14 @@ interface Recipe {
   instructions: string;
 }
 
-interface RecipePageProps {
-  params: { id: string } | Promise<{ id: string }>;
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function RecipeDetails({ params }: RecipePageProps) {
-  const resolvedParams = await params; // Ensure params is resolved if it's a Promise
+export default async function RecipeDetails({ params, searchParams }: Props) {
   const res = await fetch(
-    `https://api.spoonacular.com/recipes/${resolvedParams.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
+    `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
   );
 
   if (!res.ok) {
@@ -63,3 +64,10 @@ export default async function RecipeDetails({ params }: RecipePageProps) {
     </div>
   );
 }
+
+// Optionally, you can also add metadata
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  return {
+    title: `Recipe ${params.id}`,
+  };
+};
