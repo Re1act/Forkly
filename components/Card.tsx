@@ -1,19 +1,14 @@
-import Link from 'next/link';
-
-interface Recipe {
-  id: number;
-  title: string;
-  image: string;
-  description?: string; 
-}
+import Image from 'next/image';
 
 function Card({ recipe }: { recipe: Recipe }) {
   return (
     <div className="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-      <img 
-        src={recipe.image} 
-        alt={recipe.title} 
-        className="w-full h-48 object-cover" 
+      <Image
+        src={recipe.image}
+        alt={recipe.title}
+        className="w-full h-48 object-cover"
+        width={500} // Set appropriate width
+        height={300} // Set appropriate height
       />
       <div className="p-4 flex-grow">
         <h2 className="text-xl font-semibold text-center mb-2">{recipe.title}</h2>
