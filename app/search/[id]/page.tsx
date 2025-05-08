@@ -1,13 +1,25 @@
 import DOMPurify from 'isomorphic-dompurify';
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+  summary: string;
+  instructions: string;
+  extendedIngredients: {
+    id: number;
+    original: string;
+  }[];
+}
 
-export default async function RecipeDetails({ params, searchParams }: PageProps) {
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+type Props = {
+  params: { id: string };
+  searchParams: SearchParams;
+}
+
+export default async function RecipeDetails({ params, searchParams }: Props) {
   const id = params.id;
   const res = await fetch(
     `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
@@ -17,7 +29,7 @@ export default async function RecipeDetails({ params, searchParams }: PageProps)
     throw new Error('Failed to fetch data');
   }
 
-  const recipe = await res.json();
+  const recipe: Recipe = await res.json();
 
   const cleanSummary = DOMPurify.sanitize(recipe.summary, { ALLOWED_TAGS: [] });
 
