@@ -16,12 +16,13 @@ interface Recipe {
 }
 
 interface RecipePageProps {
-  params: { id: string };
+  params: { id: string } | Promise<{ id: string }>;
 }
 
 export default async function RecipeDetails({ params }: RecipePageProps) {
+  const resolvedParams = await params; // Ensure params is resolved if it's a Promise
   const res = await fetch(
-    `https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
+    `https://api.spoonacular.com/recipes/${resolvedParams.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
   );
 
   if (!res.ok) {
