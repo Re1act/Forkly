@@ -7,7 +7,7 @@ export default async function SearchResultPage({ searchParams }: { searchParams:
     return <p>Please enter a search query.</p>;
   }
 
-  const res = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=12&apiKey=${apiKey}`);
+  const res = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=12&addRecipeInformation=true&apiKey=${apiKey}`);
   if (!res.ok) {
     throw new Error("Failed to fetch data from the API");
   }
