@@ -8,8 +8,13 @@ interface Recipe {
   description?: string; // Optional, in case you choose to use it
 }
 
-export default async function SearchResultPage({ searchParams }: { searchParams: { q: string } }) {
-  const query = searchParams.q;
+interface SearchPageProps {
+  searchParams: Promise<{ q: string }> | { q: string };
+}
+
+export default async function SearchResultPage({ searchParams }: SearchPageProps) {
+  const resolvedParams = await searchParams;
+  const query = resolvedParams.q;
   const apiKey = process.env.SPOONACULAR_API_KEY;
 
   if (!query) {
@@ -17,7 +22,8 @@ export default async function SearchResultPage({ searchParams }: { searchParams:
   }
 
   const res = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=12&addRecipeInformation=true&apiKey=${apiKey}`
+    `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=12&addRecipeInformation=true&apiKey=${apiKey}`,
+    { next: { revalidate: 3600 } }
   );
 
   if (!res.ok) {
