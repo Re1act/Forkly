@@ -1,4 +1,5 @@
 import DOMPurify from 'isomorphic-dompurify';
+import Image from 'next/image';
 
 interface Ingredient {
   id: number;
@@ -34,11 +35,15 @@ export default async function RecipeDetails({ params }: RecipePageProps) {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
-      <img
-        src={recipe.image}
-        alt={recipe.title}
-        className="w-full max-h-96 object-cover rounded-lg mb-4"
-      />
+      <div className="relative w-full max-h-96">
+        <Image
+          src={recipe.image}
+          alt={recipe.title}
+          fill
+          className="object-cover rounded-lg mb-4"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </div>
       <p className="text-gray-700 mb-4">{cleanSummary}</p>
       <h2 className="text-2xl font-semibold mt-6 mb-2">Ingredients</h2>
       <ul className="list-disc pl-6 mb-4">

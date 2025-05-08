@@ -6,7 +6,6 @@ interface Recipe {
   title: string;
   image: string;
 }
-
 function Card({ recipe }: { recipe: Recipe }) {
   return (
     <div className="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
