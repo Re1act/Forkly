@@ -17,9 +17,10 @@ interface Recipe {
   extendedIngredients: Ingredient[]
   instructions: string
 }
+
 interface PageProps {
-  params: { id: string };
-  searchParams?: { q: string };
+  params: any
+  searchParams?: any
 }
 
 export default async function RecipeDetails({ params, searchParams }: PageProps) {
