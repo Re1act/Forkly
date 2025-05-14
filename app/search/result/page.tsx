@@ -1,18 +1,26 @@
 import Card from '@/components/Card';
+import { redirect } from "next/navigation";
+import { authOptions } from "@/auth";
+import { getServerSession } from "next-auth";
 
 interface Recipe {
   id: number;
   title: string;
   image: string;
   summary?: string;
-  description?: string; // Optional, in case you choose to use it
+  description?: string; 
 }
 
 interface SearchPageProps {
-  searchParams: any; // Set to 'any' to bypass type issues
+  searchParams: any; 
 }
 
 export default async function SearchResultPage({ searchParams }: SearchPageProps) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
+
   const resolvedParams = await searchParams;
   const query = resolvedParams.q;
   const apiKey = process.env.SPOONACULAR_API_KEY;

@@ -1,8 +1,9 @@
+"use client";
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface Recipe {
-  id: number;
+  id: number | string;
   title: string;
   image: string;
 }

@@ -1,6 +1,9 @@
 import DOMPurify from 'isomorphic-dompurify'
 import Image from 'next/image'
-
+import { redirect } from 'next/navigation'
+import { authOptions } from '@/auth'
+import { getServerSession } from 'next-auth'
+import SaveRecipeButton from '@/components/SaveRecipeButton'
 interface Ingredient {
   id: number
   original: string
@@ -15,12 +18,16 @@ interface Recipe {
   instructions: string
 }
 interface PageProps {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ q: string }> | undefined;
+  params: { id: string };
+  searchParams?: { q: string };
 }
 
 export default async function RecipeDetails({ params, searchParams }: PageProps) {
-  const { id } = await params;
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/login');
+  }
+  const { id } = params;
 
   const res = await fetch(
     `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
@@ -58,6 +65,7 @@ export default async function RecipeDetails({ params, searchParams }: PageProps)
           ? DOMPurify.sanitize(recipe.instructions, { ALLOWED_TAGS: [] })
           : 'No instructions available.'}
       </p>
+      <SaveRecipeButton recipe={recipe} userId={session.user.id}/>
     </div>
   );
 }

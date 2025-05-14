@@ -14,7 +14,7 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex items-center space-x-2 bg-white p-3 rounded-lg shadow-lg max-w-md mx-auto">
+    <form onSubmit={handleSearch} className="flex items-center space-x-2 bg-white p-3 rounded-lg  max-w-md mx-auto">
       <input
         type="text"
         value={query}

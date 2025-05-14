@@ -17,6 +17,27 @@ const eslintConfig = [
       '@typescript-eslint/no-unused-vars': 'off',   
     },
   },
+  {
+    files: [
+      "app/generated/**/*",
+      "app/generated/**",
+      "app/generated/prisma/**/*",
+      "app/generated/prisma/**",
+      "app/generated/prisma/**/*.d.ts",
+      "app/generated/prisma/**/*.js"
+    ],
+    rules: {
+      "all": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-this-alias": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-unnecessary-type-constraint": "off",
+      "@typescript-eslint/no-wrapper-object-types": "off",
+      "@typescript-eslint/no-unsafe-function-type": "off",
+      "react/no-unescaped-entities": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
