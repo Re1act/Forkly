@@ -25,7 +25,7 @@ export default async function SearchResultPage({ searchParams }: SearchPageProps
 
   const resolvedParams = await searchParams;
   const query = resolvedParams.q || resolvedParams.query;
-  const apiKey = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
+  const apiKey = process.env.SPOONACULAR_API_KEY;
 
   if (!query) {
     return <p>Please enter a search query.</p>;

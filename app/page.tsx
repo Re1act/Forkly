@@ -13,7 +13,6 @@ export default async function Home() {
     redirect('/login');
   }
 
-  // Query saved recipes directly
   const saved = await prisma.savedRecipes.findMany({
     where: { userId: session.user.id },
     include: { recipe: true },
