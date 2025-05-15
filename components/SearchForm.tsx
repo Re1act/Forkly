@@ -14,17 +14,20 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex items-center space-x-2 bg-white p-3 rounded-lg  max-w-md mx-auto">
+    <form
+      onSubmit={handleSearch}
+      className="flex w-full max-w-md mx-auto bg-white rounded-xl shadow border border-gray-200"
+    >
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for recipes..."
-        className="flex-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex-1 w-full p-4 rounded-l-xl border-0 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
       />
       <button
         type="submit"
-        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-8 py-2 bg-blue-600 text-white rounded-r-xl font-bold text-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 border-0"
       >
         Search
       </button>

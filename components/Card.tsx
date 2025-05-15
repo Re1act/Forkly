@@ -20,7 +20,7 @@ function Card({ recipe }: { recipe: Recipe }) {
         />
       </div>
       <div className="p-4 flex-grow">
-        <h2 className="text-xl font-semibold text-center mb-2">{recipe.title}</h2>
+        <h2 className="text-xl font-semibold text-center mb-2 text-black">{recipe.title}</h2>
       </div>
       <div className="p-4 pt-0 flex justify-center">
         <Link
