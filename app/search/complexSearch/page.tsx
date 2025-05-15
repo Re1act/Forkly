@@ -20,7 +20,6 @@ function buildQueryString(params: Record<string, string>) {
   Object.entries(params).forEach(([key, value]) => {
     if (value) search.append(key, value);
   });
-  // Always add these for better results
   search.set("number", "20");
   search.set("addRecipeInformation", "true");
   return search.toString();
@@ -31,8 +30,6 @@ export default async function ComplexSearchResultPage({ searchParams }: SearchPa
   if (!session) {
     redirect('/login');
   }
-
-  // If no filters at all, show a message
   if (!Object.keys(searchParams).length) {
     return <p className="text-center mt-8">Please enter at least one filter to search for recipes.</p>;
   }
