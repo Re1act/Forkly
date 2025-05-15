@@ -2,6 +2,7 @@ import Card from '@/components/Card';
 import { redirect } from "next/navigation";
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
+import Link from 'next/link';
 import ViewMoreRecipes from "@/components/ViewMoreRecipes";
 
 interface Recipe {
@@ -47,6 +48,9 @@ export default async function SearchResultPage({ searchParams }: SearchPageProps
 
   return (
     <>
+      <h1 className="text-2xl font-bold mb-6 mt-2 text-center">
+        Not what you were looking for? Try our <Link href="/search" className="text-blue-500 hover:underline">Advanced Search</Link>!
+      </h1>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {data.results.map((recipe) => (
           <Card recipe={recipe} key={recipe.id} />

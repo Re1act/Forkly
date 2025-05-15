@@ -2,7 +2,7 @@ import Card from '@/components/Card';
 import { redirect } from "next/navigation";
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
-
+import ViewMoreRecipes from '@/components/ViewMoreRecipes';
 interface Recipe {
   id: number;
   title: string;
@@ -60,6 +60,12 @@ export default async function ComplexSearchResultPage({ searchParams }: SearchPa
           <Card recipe={recipe} key={recipe.id} />
         ))}
       </div>
+      <ViewMoreRecipes
+        initialRecipes={[]}
+        query={queryString}
+        totalResults={data.results.length}
+        offset={data.results.length}
+        />
     </div>
   );
 }
