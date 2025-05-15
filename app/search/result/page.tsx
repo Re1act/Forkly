@@ -2,6 +2,7 @@ import Card from '@/components/Card';
 import { redirect } from "next/navigation";
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
+import ViewMoreRecipes from "@/components/ViewMoreRecipes";
 
 interface Recipe {
   id: number;
@@ -22,8 +23,8 @@ export default async function SearchResultPage({ searchParams }: SearchPageProps
   }
 
   const resolvedParams = await searchParams;
-  const query = resolvedParams.q;
-  const apiKey = process.env.SPOONACULAR_API_KEY;
+  const query = resolvedParams.q || resolvedParams.query;
+  const apiKey = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
 
   if (!query) {
     return <p>Please enter a search query.</p>;
@@ -38,17 +39,25 @@ export default async function SearchResultPage({ searchParams }: SearchPageProps
     throw new Error('Failed to fetch data from the API');
   }
 
-  const data: { results: Recipe[] } = await res.json();
+  const data: { results: Recipe[]; totalResults?: number } = await res.json();
 
   if (!data.results || data.results.length === 0) {
     return <p>No results found for &quot;{query}&quot;.</p>;
   }
 
   return (
-    <div className="flex flex-wrap justify-center items-center gap-4">
-      {data.results.map((recipe) => (
-        <Card recipe={recipe} key={recipe.id} />
-      ))}
-    </div>
+    <>
+      <div className="flex flex-wrap justify-center items-center gap-4">
+        {data.results.map((recipe) => (
+          <Card recipe={recipe} key={recipe.id} />
+        ))}
+      </div>
+      <ViewMoreRecipes
+        initialRecipes={[]}
+        query={query}
+        totalResults={data.totalResults}
+        offset={data.results.length}
+      />
+    </>
   );
 }

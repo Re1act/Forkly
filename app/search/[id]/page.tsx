@@ -31,7 +31,7 @@ export default async function RecipeDetails({ params, searchParams }: PageProps)
   const { id } = params;
 
   const res = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
+    `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`
   );
 
   if (!res.ok) throw new Error('Failed to fetch data');

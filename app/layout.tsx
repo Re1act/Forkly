@@ -30,6 +30,7 @@ export default function RootLayout({
         <style>{`
           input, textarea, select {
             color: #111 !important;
+            background: #fff !important;
           }
         `}</style>
       </head>
