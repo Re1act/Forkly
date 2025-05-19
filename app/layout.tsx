@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import SessionWrapper from "@/components/SessionWrapper";
+import RecipeHelper from "@/components/RecipeHelper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
         <SessionWrapper>
         <Nav/>
         {children}
+        <RecipeHelper/>
         </SessionWrapper>
       </body>
     </html>
