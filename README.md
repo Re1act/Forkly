@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Forkly
 
-## Getting Started
+Forkly is a recipe discovery platform that empowers users to explore, save, and manage recipes effortlessly. With an AI-powered assistant and advanced search capabilities, Forkly makes finding the perfect recipe easier than ever.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### **1. Authentication**
+- **GitHub OAuth**: Log in securely using your GitHub account.
+- **Auth.js Integration**: Ensures a seamless and secure authentication experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **2. Recipe Search**
+- **Basic Search**: Quickly find recipes by entering keywords.
+- **Advanced Search**: Filter recipes by cuisine, diet, intolerances, ingredients, and more.
+- **AI-Powered Assistant**: Get personalized recipe suggestions and guidance from the interactive AI assistant.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **3. Recipe Management**
+- **Save Recipes**: Add your favorite recipes to a personalized recipe list.
+- **Recipe List**: View and manage your saved recipes in one place.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **4. AI Assistant**
+- **Interactive Chat**: Ask the AI assistant for recipe suggestions or help with recipe-related queries.
+- **Recipe Titles**: The assistant provides recipe titles and guides users to explore them further using the search bar.
 
-## Learn More
+## Core Highlights
+- **User-Friendly Interface**: Designed for ease of use and accessibility.
+- **AI-Powered Assistance**: Leverages OpenAI to provide intelligent recipe suggestions.
+- **Personalized Experience**: Save and manage recipes tailored to your preferences.
 
-To learn more about Next.js, take a look at the following resources:
+## Explore Forkly
+Visit the website to start discovering recipes and enjoy the power of AI assistance in your culinary journey.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Website**: [https://forkly-beta.vercel.app/](#)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Happy cooking with Forkly! 🍴
