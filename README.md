@@ -29,7 +29,7 @@ Forkly is a recipe discovery platform that empowers users to explore, save, and 
 ## Explore Forkly
 Visit the website to start discovering recipes and enjoy the power of AI assistance in your culinary journey.
 
-**Website**: [https://forkly-beta.vercel.app/]
+**Website**: https://forkly-beta.vercel.app/
 
 ---
 Happy cooking with Forkly! 🍴
